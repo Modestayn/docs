@@ -1,0 +1,94 @@
+Урок 5 – Практика Flexbox
+
+Практика: створюємо міні-сайт з використанням Flexbox.
+
+
+
+Завдання:
+
+
+Створити шапку сайту з назвою та горизонтальним меню.
+
+Створити блок з картками курсів (3-4 картки), щоб вони вирівнювались по ширині та переносились при звуженні екрану.
+
+Додати футер, який завжди внизу сторінки.
+
+
+
+HTML приклад:
+
+<header class="header">
+  <h1>Мої курси</h1>
+  <nav class="menu">
+    <a href="">Головна</a>
+    <a href="">Про нас</a>
+    <a href="">Контакти</a>
+  </nav>
+</header>
+
+<main class="courses">
+  <div class="card">HTML & CSS</div>
+  <div class="card">JavaScript</div>
+  <div class="card">Flexbox</div>
+  <div class="card">React</div>
+</main>
+
+<footer class="footer">
+  <p>Розробив Artem</p>
+</footer>
+
+
+CSS приклад з Flexbox:
+
+/* Шапка та меню */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #4A90E2;
+  color: white;
+}
+
+.menu a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+/* Блок курсів */
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.card {
+  flex: 1 1 200px;
+  margin: 10px;
+  padding: 20px;
+  background: #F5F5F5;
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* Футер */
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: #333;
+  color: white;
+}
+
+
+✅ Мета: студенти повинні навчитися:
+
+
+
+Вирівнювати елементи по горизонталі та вертикалі.
+
+Використовувати перенесення елементів за допомогою flex-wrap.
+
+Застосовувати гнучку ширину карток за допомогою flex.

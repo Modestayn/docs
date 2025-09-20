@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс Frontend – About me</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- твій CSS -->
+</head>
+<body>
+<!-- Фон з анімацією -->
+<div id="background-animation"></div>
+<span class="beta-test" title="Beta version information">
+    Beta test 0.3V / Developed by Artem
+  </span>
+<div class="wrapper">
+    <div class="explorer">
+        <!-- Titlebar -->
+        <div class="explorer__titlebar">Frontend Course – About me</div>
+        <!-- Toolbar -->
+        <div class="explorer__toolbar">
+            <a href="index.html" class="btn">⬅ Back</a>
+            <a href="home.html" class="btn">About me</a>
+            <a href="docs.html" class="btn">Download</a>
+            <a href="news.html" class="btn">News</a>
+            <a href="blog.html" class="btn">Blog</a>
+            <div id="time-container" class="toolbar-time" aria-hidden="false">
+                <span id="current-time">--:--</span>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="explorer__content list course-home">
+            <!-- Intro -->
+            <section class="intro folder">
+                <div class="folder__icon">📘</div>
+                <div class="folder__name">
+                    <h2>Ласкаво просимо до Frontend курсу!</h2>
+                    <p>
+                        Цей курс допоможе тобі освоїти сучасний фронтенд: HTML, CSS, JavaScript, React та інші інструменти.
+                        Ми навчимо не просто писати код, а розуміти, як працюють веб-додатки та як їх оптимізувати.
+                    </p>
+                </div>
+            </section>
+            <!-- Benefits -->
+            <section class="benefits folder">
+                <div class="folder__icon">✨</div>
+                <div class="folder__name">
+                    <h2>Навіщо це потрібно?</h2>
+                    <ul>
+                        <li>Зрозуміти базові та просунуті принципи фронтенду</li>
+                        <li>Створювати адаптивні та сучасні сайти</li>
+                        <li>Отримати практичні навички для реальних проєктів</li>
+                        <li>Вміти дебажити та оптимізувати код</li>
+                        <li>Підготувати портфоліо для кар'єри</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Instructor -->
+            <section class="instructor folder">
+                <div class="folder__icon">👨‍🏫</div>
+                <div class="folder__name">
+                    <h2>Викладач: Артем Кот</h2>
+                    <p>
+                        Привіт! Мене звати Артем, я фронтенд-розробник з понад 5-річним досвідом.
+                        За цей час працював над різними проєктами: маркетплейси, CRM-системи, великі веб-застосунки,
+                        якими користуються люди по всьому світу. Зараз працюю в англійській компанії,
+                        де займаюся створенням інтерфейсів та оптимізацією роботи сайтів.
+                    </p>
+                    <p>
+                        Паралельно я викладаю веброзробку для школярів і підлітків.
+                        Для мене важливо не просто навчити писати код, а пояснити, як він працює і
+                        як застосувати ці знання у реальних проєктах.
+                        Я люблю показувати все на практиці, давати прості приклади й підтримувати кожного студента.
+                        Моя мета — щоб після курсу ви не просто знали синтаксис, а вміли створювати власні проєкти і впевнено рухалися в ІТ.
+                    </p>
+                    <h3>Підхід до навчання:</h3>
+                    <ul>
+                        <li>"Не просто код, а розуміння, як це працює"</li>
+                        <li>"Навчаємо, як працює IT у реальних компаніях"</li>
+                        <li>"Кожен учень — потенційний творець!"</li>
+                    </ul>
+                    <h3>Стек:</h3>
+                    <p><strong>Основна експертиза:</strong></p>
+                    <ul>
+                        <li>Мови та інструменти: JavaScript, HTML/CSS (BEM, SCSS), TypeScript</li>
+                        <li>Фреймворки та бібліотеки: React (Redux, Thunk, Toolkit, TanStack Query)</li>
+                        <li>Збірники: Vite</li>
+                        <li>Інструменти дизайну: Figma, Photoshop, GIMP</li>
+                    </ul>
+                    <p><strong>Додаткові навички:</strong></p>
+                    <ul>
+                        <li>Бібліотеки: Bootstrap, JustValidate, InputMask, Isotope, Ant Design, jQuery, Materialize, Shadcn/ui, Motion, i18Next, Material UI</li>
+                        <li>Серверне управління та API: Linux, Git, HTTP, API</li>
+                    </ul>
+                    <h3>Мови:</h3>
+                    <ul>
+                        <li>Українська — рідна</li>
+                        <li>Англійська — Upper-intermediate</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Student Projects -->
+            <section class="student-projects folder">
+                <div class="folder__icon">💻</div>
+                <div class="folder__name">
+                    <h2>Приклади робіт студентів:</h2>
+                    <ul>
+                        <li><a href="https://bucolic-pudding-3f652b.netlify.app/" target="_blank">Проєкт 1</a></li>
+                        <li><a href="https://delightful-biscotti-1ece8d.netlify.app" target="_blank">Проєкт 2</a></li>
+                        <li><a href="https://grand-kitten-44720a.netlify.app/" target="_blank">Проєкт 3</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script src="js/time.js"></script>
+<script src="js/anim.js"></script>
+</body>
+</html>

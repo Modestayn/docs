@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Courses</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<span class="beta-test" title="Beta version information">
+    Beta test 0.3V / Developed by Artem
+  </span>
+<div id="background-animation"></div>
+<div class="wrapper">
+    <div class="explorer">
+        <!-- Title bar -->
+        <div class="explorer__titlebar">
+            <span>Front-end Docs</span>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="explorer__toolbar">
+            <button disabled>⬅ Back</button>
+            <a href="home.html" class="btn">About me</a>
+            <a href="docs.html" class="btn">Download</a>
+            <a href="news.html" class="btn">News</a>
+            <a href="blog.html" class="btn">Blog</a>
+            <div id="time-container" class="toolbar-time" aria-hidden="false">
+                <span id="current-time">--:--</span>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="explorer__content list">
+            <a class="folder" href="coursePages/course1.html" data-course="1" data-type="text">
+                <div class="folder__icon">📁</div>
+                <div class="folder__name">Course 1</div>
+            </a>
+            <a class="folder" href="coursePages/course2.html" data-course="2" data-type="text">
+                <div class="folder__icon">📁</div>
+                <div class="folder__name">Course 2</div>
+            </a>
+            <a class="folder" href="course3.html" data-course="3" data-type="text">
+                <div class="folder__icon">📁</div>
+                <div class="folder__name">Course 3  <span style="color:red">(in development)</span></div>
+            </a>
+            <a class="folder" href="course4.html" data-course="4" data-type="text">
+                <div class="folder__icon">📁</div>
+                <div class="folder__name">Course 4  <span style="color:red">(in development)</span></div>
+            </a>
+            <a class="folder" href="course5.html" data-course="5" data-type="text">
+                <div class="folder__icon">📁</div>
+                <div class="folder__name">Course 5  <span style="color:red">(in development)</span></div>
+            </a>
+        </div>
+
+        <div class="explorer__support">
+            <h2 style="margin-left: 15px; color: #fff">Зв'язатись зі мною:</h2>
+            <ul>
+                <li>Для покращення функціоналу та зручності сайту</li>
+                <li>Для доп питань по методам</li>
+                <li>Або інше...</li>
+            </ul>
+            <h3 style="margin-left: 15px; color: #fff">Способи звернення:</h3>
+            <ul>
+                <li><a href="mailto:kotartemmodestayn@gmail.com">Mail</a></li>
+                <li><a href="https://t.me/KotArtem2002" target="_blank">Telegram</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- JS -->
+<script src="js/time.js"></script>
+<script src="js/anim.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

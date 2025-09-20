@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Курс Frontend – Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<span class="beta-test" title="Beta version information">
+    Beta test 0.3V / Developed by Artem
+</span>
+
+<div id="background-animation"></div>
+
+<div class="wrapper">
+    <div class="explorer">
+        <!-- Title bar -->
+        <div class="explorer__titlebar">
+            <span>Front-end Blog</span>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="explorer__toolbar">
+            <a href="index.html" class="btn">⬅ Back</a>
+            <a href="home.html" class="btn">About me</a>
+            <a href="docs.html" class="btn">Download</a>
+            <a href="news.html" class="btn">News</a>
+            <a href="blog.html" class="btn">Blog</a>
+            <div id="time-container" class="toolbar-time" aria-hidden="false">
+                <span id="current-time">--:--</span>
+            </div>
+        </div>
+
+        <!-- Student Blog -->
+        <div id="news-section">
+            <div class="student-blog-container">
+                <h2>Student Blog</h2>
+                <input type="search" placeholder="Search..." class="blog-search">
+            </div>
+            <ul id="blog-list">
+                <!-- === Учёба и карьера === -->
+                <li>
+                    <strong>Питання - відповідь</strong>
+                    <span>2025-09-20</span>
+                    <h2>JavaScript Code:</h2>
+                    <pre><code>
+let users = [
+    { id: 11, name: 'Adam', age: 23, group: 'editor' },
+    { id: 47, name: 'John', age: 28, group: 'admin' },
+    { id: 85, name: 'William', age: 34, group: 'editor' },
+    { id: 97, name: 'Oliver', age: 28, group: 'admin' }
+];
+
+let res = users.filter(it => it.group === 'admin');
+
+console.log(res);
+    </code></pre>
+                    <p>
+                         JavaScript. що виведе в консоль?
+                    </p>
+                        <button  class="back-btn" data-action="accordion">Відповідь</button>
+                    <br><br>
+                        <p class="answer">
+                            <button style="margin-bottom: 10px;" class="back-btn" data-action="accordion-close">Закрити</button>
+                            <br>
+                            Що робить код
+
+                            users — масив об’єктів, кожен об’єкт містить id, name, age та group.
+
+                            filter створює новий масив, який включає ті об’єкти, у яких group === 'admin'.
+
+                            console.log(res) виводить цей новий масив у консоль.
+                            Чому саме такий результат
+
+                            У початковому масиві є 4 користувачі, але лише 2 з них мають group: 'admin' — це John та Oliver.
+
+                            Метод filter повертає новий масив, не змінюючи початковий.
+
+                            Тому в консоль потрапляє масив із цих двох об’єктів.
+                        </p>
+                </li>
+                <li>
+                    <strong>Тайм-менеджмент для розробників-початківців</strong>
+                    <span>2025-09-10</span>
+                    <p>
+                        Якщо ви вчите Frontend чи будь-яку іншу IT-спеціальність, швидко помічаєте: завдань багато, а часу завжди мало. Ключ до успіху — правильний тайм-менеджмент.
+                    </p>
+                    <p>
+                        Використовуйте метод Pomodoro (25 хвилин роботи + 5 хвилин відпочинку), щоб уникати перевтоми. Плануйте тиждень у <b>Notion</b> або <b>Trello</b> — створюйте борди з темами, які потрібно вивчити (HTML, CSS, JS, Git).
+                    </p>
+                    <p>
+                        Не забувайте про <b>читання офіційної документації</b>. Наприклад, <a href="https://developer.mozilla.org/">MDN</a> для JavaScript чи React Docs — це джерела, яким довіряють навіть сеньйори.
+                    </p>
+                    <p><em>Порада: починайте день із завдання, яке найбільше «болить». Закриєте його — решта піде легше.</em></p>
+                </li>
+                <li>
+                    <strong>Корисні сервіси для IT-студентів</strong>
+                    <span>2025-09-12</span>
+                    <p>
+                        Самоосвіта в IT неможлива без цифрових інструментів. Є кілька must-have сервісів, які економлять час.
+                    </p>
+                    <p>
+                        • <b>MDN Web Docs</b> — база знань з HTML, CSS, JS.<br>
+                        • <b>FreeCodeCamp</b> — безкоштовні практичні завдання для відпрацювання навичок.<br>
+                        • <b>GitHub</b> — публікуйте свої проекти, це ваше «портфоліо».<br>
+                        • <b>ChatGPT</b> — швидке пояснення складних тем чи генерація прикладів.
+                    </p>
+                    <p>
+                        Для організації: <b>Notion</b>, <b>Trello</b>, <b>Google Calendar</b>. Вони допоможуть планувати навчання, роботу та відпочинок.
+                    </p>
+                </li>
+                <li>
+                    <strong>Як знайти першу роботу чи стажування</strong>
+                    <span>2025-09-15</span>
+                    <p>
+                        У IT-галузі можна почати кар'єру навіть без університету — достатньо знань і портфоліо. Є кілька шляхів пошуку роботи.
+                    </p>
+                    <p>
+                        1) Створіть <b>LinkedIn</b> профіль: заповніть проекти, курси, додайте опис «Junior Frontend Developer».<br>
+                        2) Використовуйте <b>Djinni.co</b> — українська платформа, де роботодавці самі пишуть кандидатам.<br>
+                        3) Спробуйте <b>фріланс</b> (UpWork, Fiverr), щоб отримати перші реальні замовлення.
+                    </p>
+                    <p>
+                        Якщо ви вчитеся в онлайн-академії (наприклад, Mate Academy, Beetroot, GoIT) — там часто є кар’єрна підтримка та партнерські компанії.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Історія успіху: від студента до Junior</strong>
+                    <span>2025-09-17</span>
+                    <p>
+                        Андрій почав вчити Frontend самостійно: спершу YouTube та документація, потім курс в онлайн-академії. Через 8 місяців він виклав 5 проектів на GitHub та оформив профіль у LinkedIn.
+                    </p>
+                    <p>
+                        Він подався на кілька стажувань через Djinni і отримав пропозицію Junior Frontend Developer у продуктовій компанії. Головний секрет? <b>Постійна практика і активність у спільнотах</b>.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Лайфхаки для економії під час навчання</strong>
+                    <span>2025-09-19</span>
+                    <p>
+                        Навчання в академії чи самостійна підготовка — це завжди інвестиція. Але можна зекономити.
+                    </p>
+                    <p>
+                        • Використовуйте <b>студентські знижки</b> (Spotify, Netflix, IDE).<br>
+                        • Купуйте курси на знижках (Udemy має великі сейли).<br>
+                        • Об’єднуйтесь у <b>групи</b> для підписок і спільної оренди коворкінгу.
+                    </p>
+                    <p>
+                        І пам’ятайте: найбільша економія — безкоштовні ресурси (MDN, FreeCodeCamp, YouTube).
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Баланс навчання і відпочинку</strong>
+                    <span>2025-09-20</span>
+                    <p>
+                        Якщо ви вчитеся програмуванню, важливо пам’ятати: мозок засвоює інформацію під час відпочинку.
+                    </p>
+                    <p>
+                        Робіть перерви кожні 1–2 години, гуляйте на свіжому повітрі. Плануйте час на спорт і друзів.
+                    </p>
+                    <p>
+                        Навіть якщо ви самонавчаєтесь, це не означає «24/7 за ноутом» — такий підхід веде до вигорання.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Як справлятися зі стресом під час навчання</strong>
+                    <span>2025-09-22</span>
+                    <p>
+                        Коли ви готуєтесь до співбесіди чи працюєте над проектом, стрес неминучий. Головне — вміти його контролювати.
+                    </p>
+                    <p>
+                        Спробуйте практикувати <b>Pomodoro</b>, медитації (Headspace), фізичні вправи.
+                        Дуже допомагає розмова з людьми, які проходили цей шлях — приєднуйтесь до <b>Telegram-чатів айтішників</b>.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Книги для майбутніх розробників</strong>
+                    <span>2025-09-24</span>
+                    <p>
+                        Є книги, які реально допоможуть розвиватися у сфері IT.
+                        • «You Don’t Know JS» (Kyle Simpson) — глибоке розуміння JavaScript.<br>
+                        • «Clean Code» (Robert C. Martin) — як писати зрозумілий код.<br>
+                        • «Атомні звички» (James Clear) — як виробити дисципліну.
+                    </p>
+                    <p>
+                        Читання документації теж має стати звичкою. Це не сухий текст, а ключ до швидкого прогресу.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Soft Skills: ключ до першої роботи</strong>
+                    <span>2025-09-26</span>
+                    <p>
+                        Роботодавці шукають не тільки знання React чи JS. Вони цінують <b>комунікацію</b>, <b>уміння працювати в команді</b> та <b>англійську мову</b>.
+                    </p>
+                    <p>
+                        Тренуйтеся презентувати свої проекти. Пишіть про них у LinkedIn. Навіть невеликий pet-project (ToDo, weather-app) може виглядати професійно, якщо правильно його описати.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Онлайн-курси та академії</strong>
+                    <span>2025-09-28</span>
+                    <p>
+                        Якщо університет не дає достатньо практики, вихід — <b>онлайн-академії</b>. Mate Academy, Beetroot, GoIT пропонують інтенсиви з фокусом на практику і допомогу з працевлаштуванням.
+                    </p>
+                    <p>
+                        Або можна вчитися на платформах <b>Coursera</b>, <b>Udemy</b>, <b>FrontendMasters</b>. Важливо — робити проекти і викладати їх у GitHub.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Як правильно оформити профіль у LinkedIn</strong>
+                    <span>2025-09-30</span>
+                    <p>
+                        LinkedIn — це не тільки соцмережа, а й ваше резюме.
+                        • Використовуйте професійне фото.<br>
+                        • Додайте заголовок «Junior Frontend Developer | React | JavaScript».<br>
+                        • У розділі «About» напишіть коротко про навички та проекти.<br>
+                        • Викладіть GitHub-проекти, навіть невеликі.
+                    </p>
+                    <p>
+                        Порада: підписуйтеся на компанії та рекрутерів. Це підвищує шанси, що вам напишуть.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Перші кроки на Djinni та фрілансі</strong>
+                    <span>2025-10-02</span>
+                    <p>
+                        Djinni — українська платформа, де кандидати анонімні, а роботодавці самі пишуть першими. Створіть профіль з коротким описом навичок і проєктів. Це шанс отримати стажування чи джун-позицію.
+                    </p>
+                    <p>
+                        Фріланс (UpWork, Fiverr) підходить для тих, хто хоче швидко отримати перший комерційний досвід. Почніть з дрібних завдань: лендінги, верстка, виправлення багів.
+                    </p>
+                </li>
+
+                <li>
+                    <strong>Тренди в освіті 2025</strong>
+                    <span>2025-10-05</span>
+                    <p>
+                        У 2025 році акцент зміщується на <b>онлайн-освіту</b> та <b>AI-помічників</b>.
+                        Багато студентів вибирають курси замість університету, бо це швидше й практичніше.
+                    </p>
+                    <p>
+                        AI (як ChatGPT) вже інтегрується в навчальні платформи. Це означає, що тепер кожен має доступ до персонального ментора 24/7.
+                    </p>
+                </li>
+            </ul>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div> <!-- /.explorer -->
+</div> <!-- /.wrapper -->
+
+<script src="js/accordion.js"></script>
+<script src="js/blogScript.js"></script>
+<script src="js/time.js"></script>
+<script src="js/anim.js"></script>
+</body>
+</html>

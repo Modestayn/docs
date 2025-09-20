@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course 1 – Lessons</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<span class="beta-test" title="Beta version information">
+    Beta test 0.3V / Developed by Artem
+</span>
+<div id="background-animation"></div>
+<div class="wrapper">
+    <!-- Explorer container -->
+    <div class="explorer">
+        <!-- Title bar -->
+        <div class="explorer__titlebar">📂 Course 1</div>
+        <!-- Toolbar -->
+        <div class="explorer__toolbar">
+            <a href="../index.html">⬅ Back</a>
+            <a href="../home.html">Home</a>
+            <a href="../docs.html">Download</a>
+            <a href="../news.html">News</a>
+            <div id="time-container" class="toolbar-time" aria-hidden="false">
+                <span id="current-time">--:--</span>
+            </div>
+        </div>
+        <!-- Lessons grid -->
+        <div class="explorer__grid" id="lessons-grid"></div>
+
+        <!-- Viewer -->
+        <div id="lesson-viewer" class="hidden">
+            <button id="back-btn" class="back-btn">⬅ Back</button>
+            <h2 id="viewer-title">Untitled.txt</h2>
+            <div class="notepad" id="viewer-text"></div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="../js/time.js"></script>
+<script src="../js/anim.js"></script>
+<script src="../js/courses/course1.js"></script>
+</body>
+</html>

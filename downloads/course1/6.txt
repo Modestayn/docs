@@ -1,0 +1,97 @@
+Урок 6 – Позиціювання (Positioning)
+
+CSS позиціювання дозволяє розташовувати елементи на сторінці у потрібному місці. Основні властивості:
+
+
+
+Типи позиціювання:
+
+
+static – стандартне позиціювання (за замовчуванням), елементи йдуть один за одним.
+
+relative – відносне позиціювання: елемент зміщується від свого початкового місця.
+
+absolute – абсолютне: елемент позиціонується від найближчого батька з position: relative або від body, якщо таких немає.
+
+fixed – фіксоване: елемент прив'язаний до вікна браузера і не рухається при скролі.
+
+sticky – липке: елемент веде себе як relative, поки не дійде до заданого порогу, після чого прилипає.
+
+
+
+Основні властивості для позиціювання:
+
+
+top, right, bottom, left – задають відступ від відповідного краю.
+
+z-index – порядок накладання елементів (вищий – поверх).
+
+
+
+Приклади:
+
+
+Relative:
+
+
+.box {
+  position: relative;
+  top: 20px;
+  left: 30px;
+}
+
+
+Absolute:
+
+
+.container {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #f0f0f0;
+}
+
+.box {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #4A90E2;
+  color: white;
+  padding: 10px;
+}
+
+
+Fixed:
+
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #333;
+  color: white;
+  padding: 15px;
+}
+
+
+Sticky:
+
+
+.title {
+  position: sticky;
+  top: 0;
+  background: yellow;
+  padding: 10px;
+}
+
+
+✅ Мета: студенти повинні навчитися:
+
+
+
+Розуміти різницю між static, relative, absolute, fixed і sticky.
+
+Застосовувати top/right/bottom/left для зміщення елементів.
+
+Керувати накладанням елементів через z-index.

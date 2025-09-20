@@ -1,0 +1,87 @@
+Урок 7 – Псевдокласи (Pseudo-classes)
+
+Псевдокласи дозволяють стилізувати елементи залежно від їх стану, положення або взаємодії з користувачем, без додаткових класів у HTML.
+
+
+
+Основні псевдокласи:
+
+
+:hover – коли користувач наводить мишку на елемент.
+
+:active – коли елемент активний (натиснутий).
+
+:focus – коли елемент має фокус (наприклад, input при кліку).
+
+:first-child – перший дочірній елемент у контейнері.
+
+:last-child – останній дочірній елемент.
+
+:nth-child(n) – n-ий дочірній елемент (можна використовувати формули).
+
+:not(selector) – елементи, які не відповідають селектору.
+
+
+
+Приклади:
+
+
+Hover та Active:
+
+
+button:hover {
+  background-color: #4A90E2;
+  color: white;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+Focus:
+
+
+input:focus {
+  border-color: #F5A623;
+  outline: none;
+}
+
+
+First / Last Child:
+
+
+ul li:first-child {
+  font-weight: bold;
+}
+
+ul li:last-child {
+  color: red;
+}
+
+
+Nth-child:
+
+
+ul li:nth-child(2n) {
+  background-color: #f0f0f0;
+}
+
+
+Not:
+
+
+ul li:not(:first-child) {
+  margin-left: 10px;
+}
+
+
+✅ Мета: студенти повинні навчитися:
+
+
+
+Використовувати псевдокласи для стилізації різних станів елементів.
+
+Створювати динамічний інтерфейс без додаткових класів у HTML.
+
+Розуміти, як працюють структурні псевдокласи (first-child, nth-child тощо).

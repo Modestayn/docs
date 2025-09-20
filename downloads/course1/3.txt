@@ -1,0 +1,159 @@
+Lesson 3 – Форми, API та Google Fonts
+
+
+
+Форми у HTML дозволяють користувачам вводити дані та відправляти їх на сервер
+(наприклад: авторизація, реєстрація, пошук).
+
+
+
+
+
+1. Тег <form>
+
+
+Основний контейнер для форми – <form>.
+Він визначає куди та яким методом будуть надсилатись дані.
+
+
+
+<form action="" method="POST">
+  <input type="text" name="username" placeholder="Ваше ім’я">
+  <button type="submit">Надіслати</button>
+</form>
+
+
+
+action – адреса, куди відправляються дані.
+
+method – спосіб передачі даних:
+  
+
+  
+GET – дані видно в адресному рядку (для пошуку, фільтрації).
+
+  
+POST – дані приховані, безпечніше (реєстрація, логін).
+
+  
+
+
+
+
+
+
+2. Теорія: що таке API
+
+
+API (Application Programming Interface) – це “місток” між клієнтом (ваш сайт) і сервером.
+Форми відправляють дані на сервер (API), сервер їх обробляє і повертає результат.
+
+
+
+Користувач → (заповнює форму) → Сайт → API → Сервер → Відповідь
+
+
+
+Наприклад: форма входу на сайт передає логін і пароль на API,
+а сервер перевіряє їх і повертає результат.
+
+
+
+
+
+3. Відправка форми без бекенду
+
+
+Є сервіси, які дозволяють відправляти форми напряму на e-mail без власного сервера:
+
+
+
+Formspree
+
+FormSubmit
+
+
+
+<form action="" method="POST">
+  <input type="email" name="email" placeholder="Ваш Email">
+  <textarea name="message" placeholder="Ваше повідомлення"></textarea>
+  <button type="submit">Надіслати</button>
+</form>
+
+
+
+Такі сервіси пересилають введені дані напряму на вашу пошту через свій API.
+
+
+
+
+
+4. Основні типи інпутів
+
+
+Тег <input> має багато різних type для різних даних.
+
+
+
+
+text – текстове поле.
+
+email – перевіряє формат e-mail.
+
+password – приховує введені символи.
+
+number – тільки числа.
+
+date – вибір дати.
+
+checkbox – прапорець.
+
+radio – перемикач (можна вибрати лише один варіант із групи).
+
+file – завантаження файлів.
+
+color – вибір кольору.
+
+range – повзунок.
+
+submit – кнопка для відправки форми.
+
+
+
+<form>
+  <input type="text" placeholder="Ім’я"> <br>
+  <input type="email" placeholder="E-mail"> <br>
+  <input type="password" placeholder="Пароль"> <br>
+  <input type="checkbox"> Приймаю умови <br>
+  <input type="radio" name="gender"> Чоловік
+  <input type="radio" name="gender"> Жінка <br>
+  <input type="date"> <br>
+  <input type="file"> <br>
+  <input type="color"> <br>
+  <input type="range"> <br>
+  <button type="submit">Відправити</button>
+</form>
+
+
+
+
+5. Підключення Google Fonts
+
+
+Щоб використовувати красиві шрифти, можна підключити Google Fonts.
+
+
+
+<!-- У head додаємо посилання -->
+<link rel="preconnect" href="">
+<link rel="preconnect" href="" crossorigin>
+<link href="" rel="stylesheet">
+
+<!-- Використання у CSS -->
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+Тепер весь текст на сторінці буде відображатись у шрифті Roboto.
