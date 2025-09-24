@@ -1,0 +1,103 @@
+Урок 2 – Git та GitHub: співпраця у репозиторіях, якими ви не володієте
+
+Git — система контролю версій; GitHub — сервіс для хостингу та організації співпраці через форки, гілки та pull request (PR). Тут детально про workflow, синхронізацію з upstream та роботу як contributor або collaborator.
+
+
+
+Підходи до співпраці
+
+
+Fork + Pull Request — стандарт, коли у вас немає прав: форк робиться у вашому акаунті, ви пушите у форк і відкриваєте PR до оригіналу.
+
+Branch в оригінальному репозиторії — якщо вам надали права collaborator, ви створюєте гілку напряму і пушите туди; далі PR або merge.
+
+Patch / Issue — для дуже малих змін можна надіслати патч або пропозицію в issue.
+
+
+
+Типовий workflow через fork (покроково)
+
+# Форкаємо на GitHub, потім локально:
+git clone git@github.com:your-username/repo.git
+cd repo
+# Додаємо upstream (оригінал) для синхронізації
+git remote add upstream git@github.com:original-owner/repo.git
+# Переконайтесь у списку remote
+git remote -v
+# Створюємо фічеву гілку
+git checkout -b feature/your-feature
+# Працюємо, додаємо, комітимо
+git add .
+git commit -m "feat: короткий опис"
+# Пушимо в свій форк
+git push origin feature/your-feature
+# Створюємо Pull Request з вашої гілки у гілку проєкту (наприклад main)
+
+
+Як синхронізуватися з upstream (щоб уникнути конфліктів)
+
+# Оновити локальну main з upstream
+git checkout main
+git fetch upstream
+git merge upstream/main
+# Або, якщо хочете чистішу історію, rebase
+git checkout feature/your-feature
+git fetch upstream
+git rebase upstream/main
+# Після rebase може знадобитись push з форсом (робіть --force-with-lease)
+git push origin feature/your-feature --force-with-lease
+
+
+Практика роботи з PR — чекліст
+
+
+Дотримуйтесь CONTRIBUTING.md та шаблонів (якщо є).
+
+Опис PR: що змінено, чому, як тестувати; додавайте короткі та змістовні коміти.
+
+Запускайте локальні тести і lint перед пушем; якщо в проекті є CI (наприклад GitHub Actions) — дивіться логи PR.
+
+Оновлюйте гілку з upstream (merge або rebase) перед тим, як просити merge.
+
+Виконуйте правки на основі code review; пояснюйте зміни у коментарях PR.
+
+
+
+Вирішення конфліктів
+
+Якщо під час merge/rebase виникають конфлікти: знайдіть маркери <<<<<<<, =======, >>>>>>>, вручну виправте код, потім `git add ` і `git rebase --continue` або зробіть commit після merge. Завжди тестуйте після вирішення конфліктів.
+
+
+
+Best practices та поради
+
+
+Короткі, сфокусовані гілки для однієї задачі: `feature/issue-123`, `fix/typo`.
+
+Використовуйте `--force-with-lease` замість `--force` для безпечнішого переписування історії.
+
+Не пуште секрети; використовуйте `.gitignore` і GitHub Secrets для CI.
+
+Якщо проект вимагає підписані коміти — налаштуйте GPG або SSH підписи.
+
+Уточніть стратегію злиття (merge commit, squash merge або rebase) у команді — це впливає на історію.
+
+Перевіряйте файли `CONTRIBUTING.md`, `CODEOWNERS`, шаблони PR/issue — вони задають правила проєкту.
+
+
+
+Шпаргалка команд
+
+git status
+git add 
+git commit -m "msg"
+git push origin 
+git fetch upstream
+git merge upstream/main
+# або
+git rebase upstream/main
+git pull --rebase upstream main
+
+
+✅ Мета: навчитися ефективно працювати через fork і PR, синхронізувати гілки з upstream, безпечно вирішувати конфлікти, дотримуватись правил проєкту та проходити код-рев'ю.
+

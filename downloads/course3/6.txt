@@ -1,0 +1,241 @@
+Урок 6 – AJAX, JSON та Git: запити на сервер, DNS, HTTP/HTTPS, асинхронний/синхронний код, мікро- та макротаски
+
+Цей урок охоплює всі рівні: як браузер відправляє запит (DNS → TCP/TLS → HTTP), які є способи комунікації (AJAX, fetch, XHR, WebSocket, SSE), як працює формат JSON, як обробляти відповіді та помилки, що таке синхронний/асинхронний код, та як розуміти мікро- і макротаски в event loop. Наприкінці — практичні поради по Git (що і як комітити, де зберігати ключі).
+
+
+
+1) Основні способи комунікації клієнт↔сервер
+
+
+Класичні HTTP-запити (request/response): GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS.
+
+AJAX — загальне поняття: робота з HTTP без перезавантаження сторінки; реалізації: XMLHttpRequest (старіший) і Fetch API (сучасний).
+
+HTTP-бібліотеки — приклад назви: axios (зручніший API, інтерсептори для токенів).
+
+Реальні-time варіанти: Polling, Long-polling, Server-Sent Events (SSE) для однонаправлених оновлень, WebSocket для двонаправленої комунікації, WebRTC для P2P медіа/даних.
+
+
+
+2) HTTP-методи та семантика
+
+
+GET — читання (safe, idempotent).
+
+POST — створення/операції (не idempotent).
+
+PUT — заміна ресурсу (idempotent).
+
+PATCH — часткове оновлення.
+
+DELETE — видалення (idempotent).
+
+HEAD — як GET, але без тіла; OPTIONS — дізнатися дозволи/для CORS preflight.
+
+
+
+3) Приклад: відправка JSON через Fetch (async/await)
+
+const payload = { name: 'Artem' };
+try {
+  const res = await fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+  console.log('server response', json);
+} catch (err) {
+  console.error('request failed', err);
+}
+
+Порада: завжди перевіряйте res.ok / код статусу; мережеві помилки кидають виняток (catch).
+
+
+
+4) XMLHttpRequest (async vs sync) — коротко
+
+// asynchronous
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/api/data', true);
+xhr.onload = () => { if (xhr.status === 200) console.log(JSON.parse(xhr.responseText)); };
+xhr.onerror = () => { console.error('network error'); };
+xhr.send();
+
+// synchronous (deprecated on main thread — блокує UI)
+xhr.open('GET', '/api/data', false);
+xhr.send(null);
+console.log(xhr.responseText);
+
+Не використовуйте синхронні запити у UI — вони блокують event loop і роблять сторінку нефункціональною.
+
+
+
+5) CORS і preflight
+
+Якщо запит використовує нестандартні заголовки, методи (PUT, DELETE, PATCH) або Content-Type відмінний від простих типів, браузер спочатку відправляє OPTIONS (preflight). Сервер має відповісти з заголовками Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers щоб дозвілити запит.
+
+
+
+6) HTTP статуси (коротко)
+
+
+1xx — інформативні
+
+2xx — успіх (200 OK, 201 Created, 204 No Content)
+
+3xx — редиректи (301, 302, 304)
+
+4xx — помилки клієнта (400, 401, 403, 404, 409, 429)
+
+5xx — помилки сервера (500, 502, 503)
+
+
+
+7) JSON — робота
+
+// JS -> сервер
+const str = JSON.stringify({ foo: 'bar' });
+// Отримали від сервера
+const obj = await response.json();
+
+JSON — текстовий формат; перевіряйте вхідні дані на сервері (серверна валідація) та не довіряйте клієнтським перевіркам.
+
+
+
+8) DNS: як домен → IP (по кроках)
+
+
+Вводите example.com у браузері.
+
+Браузер/ОС перевіряє локальний кеш і /etc/hosts.
+
+Якщо немає — запит іде до DNS-резолвера (часто — провайдер або системний DNS, recursive resolver).
+
+Резолвер запитує root-сервер → повертає TLD nameserver (.com) → TLD повертає авторитетний nameserver для example.com → авторитетний повертає A/AAAA запис (IP).
+
+IP повертається клієнту і кешується (TTL визначає час кешування).
+
+
+Пояснення термінів: NS record — вказує, які nameserver-и є авторитетними для зони; resolver — той, хто робить рекурсивний пошук (може кешувати відповіді).
+
+
+
+9) HTTP vs HTTPS — TLS (коротко, але з ключовими кроками)
+
+
+HTTP — передача у відкритому тексті (порт 80).
+
+HTTPS — HTTP поверх TLS/SSL (порт 443): TLS handshake (ClientHello → ServerHello → сертифікат → перевірка ланцюжка довіри → ключовий обмін (ECDHE) → встановлення симетричного ключа) → зашифровані дані.
+
+Сертифікат підписаний CA; браузер довіряє лише сертифікатам від довірених кореневих CA. TLS забезпечує конфіденційність та цілісність (захист від MITM).
+
+HTTP/2 — мультиплексування, бінарний фреймінг, стиснення заголовків; HTTP/3 — QUIC поверх UDP (швидше відновлення, менша латентність).
+
+
+
+10) Асинхронний vs синхронний код у JS
+
+
+Синхронний код виконується послідовно і блокує call stack до завершення (напр., важкий цикл, синхронний XHR на головному потоці) — користувач бачить зависання сторінки.
+
+Асинхронний код (callbacks, Promises, async/await, fetch, setTimeout) дозволяє виконувати довгі операції без блокування головного потоку: операція запускається, а потім її результат обробляється колбеком або Promise-обробником.
+
+await зупиняє виконання лише всередині async-функції (не блокує весь event loop).
+
+
+
+11) Event loop: макро- і мікротаски (порядок виконання)
+
+Коротка модель: call stack виконує поточний скрипт → коли скрипт завершується, браузер обробляє усі мікротаски → можливий рендер/paint → потім витягується наступна макротаска з черги завдань.
+
+
+
+Мікротаски (microtasks): Promise.then/catch/finally, queueMicrotask, MutationObserver — виконуються швидко після поточної таски і перед наступним рендером/макротаскою.
+
+Макротаски (tasks): setTimeout, setInterval, I/O callbacks, UI events — кожна така таска виконується окремо; після неї чиститься мікротаск-черга.
+
+Результат: Promise callbacks завжди виконуються раніше, ніж setTimeout(..., 0) навіть якщо вони були поставлені після виклику setTimeout.
+
+
+console.log('script start');
+setTimeout(() => console.log('macrotask'), 0);
+Promise.resolve().then(() => console.log('microtask'));
+console.log('script end');
+// Порядок: script start, script end, microtask, macrotask
+
+Нотатка для Node.js: модель подібна, але є свої черги і додаткові примітки (process.nextTick має вищий пріоритет поряд з мікротасками); не забудь читати документацію Node щодо порядку черг, якщо пишеш під сервер.
+
+
+
+12) Надійність, таймаути, retry, backoff
+
+
+Додавайте таймаути для мережевих запитів (fetch має timeout треба реалізовувати через AbortController).
+
+Реалізуйте retry з експоненціальним backoff для тимчасових помилок (429, 5xx).
+
+Логи та метрики: реєструйте помилки запитів для аналізу (не комітьте ключі у репо!).
+
+
+
+13) Безпека: секрети, токени, CSRF, XSS
+
+
+Не зберігайте секрети в коді — використовуй .env і додавай .env до .gitignore.
+
+Для авторизації: використовуй Authorization: Bearer <token> або HttpOnly cookies (щоб уникнути XSS-крадіжки токенів).
+
+CSRF: для state-changing запитів використовуйте CSRF-токени або SameSite cookies.
+
+Санітизуй дані на сервері та фільтруй/екрануй вихідний HTML, щоб уникнути XSS.
+
+
+
+14) Git-поради при роботі з API-кодом
+
+
+Не комітьте ключі/сертифікати — додайте .env у .gitignore і збережіть шаблон .env.example.
+
+Комітіть короткими, атомарними змінами: git commit -m "feat(api): add fetch wrapper with timeout".
+
+Використовуйте фічеві гілки: feature/add-api-client і PR для рев'ю.
+
+Якщо потрібно переключитися гілку — користуйтесь git stash або робіть commit у тимчасову гілку.
+
+Тести запитів локально з curl/httpie/Postman (назви інструментів) і додавайте інтеграційні/мок-тести на CI.
+
+
+
+15) Короткі коди-гаки (корисні приклади)
+
+// Fetch + timeout через AbortController
+const controller = new AbortController();
+const id = setTimeout(() => controller.abort(), 5000); // 5s timeout
+try {
+  const res = await fetch('/api', { signal: controller.signal });
+  clearTimeout(id);
+  const data = await res.json();
+} catch (err) {
+  if (err.name === 'AbortError') console.warn('timeout');
+}
+
+// axios interceptor (назва бібліотеки: axios)
+axios.interceptors.request.use(cfg => { cfg.headers.Authorization = `Bearer ${getToken()}`; return cfg; });
+
+// Простий exponential backoff
+async function retry(fn, retries = 3) {
+  let attempt = 0;
+  while (attempt <= retries) {
+    try { return await fn(); } catch (e) {
+      attempt++;
+      await new Promise(r => setTimeout(r, 2 ** attempt * 100));
+    }
+  }
+  throw new Error('all retries failed');
+}
+
+
+✅ Мета: зрозуміти як працює мережа від доменного імені до зашифрованого HTTP-запиту, знати основні способи обміну даними (JSON), правильно обробляти помилки, використовувати асинхронні інструменти JS, розуміти порядок виконання (мікро/макро таски) і безпечно керувати кодом у Git (не зберігати секрети, робити фічеві гілки, тестувати запити).
+

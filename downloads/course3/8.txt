@@ -1,0 +1,85 @@
+Урок 8 – Інтеграція API Нової Пошти + Логін через Google
+
+У цьому уроці ми розглянемо, як підключити API Нової Пошти для відправки/отримання даних про доставку, а також як реалізувати авторизацію користувача через Google.
+
+
+
+Інтеграція Нової Пошти
+
+
+API надає можливість відстежувати посилки, створювати накладні, отримувати список відділень.
+
+Використовуються POST та GET запити з ключем авторизації.
+
+Дані повертаються у форматі JSON.
+
+
+
+Приклад запиту на відділення
+
+fetch('https://api.novaposhta.ua/v2.0/json/', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    apiKey: 'YOUR_API_KEY',
+    modelName: 'AddressGeneral',
+    calledMethod: 'getWarehouses',
+    methodProperties: { CityName: 'Київ' }
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data.data))
+.catch(err => console.error(err));
+
+
+Реєстрація та логін через Google
+
+
+Застосовується OAuth 2.0.
+
+Користувач натискає кнопку «Увійти через Google».
+
+Відкривається вікно авторизації від Google, після чого програма отримує токен доступу.
+
+Дані користувача (ім’я, email, фото) можна зберігати у вашій базі.
+
+
+
+Приклад підключення Google Login (JavaScript)
+
+// Підключення Google Identity Services SDK
+import { google } from 'googleapis';
+
+function handleCredentialResponse(response) {
+  console.log('JWT Token:', response.credential);
+  // Розшифровка токена для отримання даних користувача
+}
+
+window.onload = function () {
+  google.accounts.id.initialize({
+    client_id: 'YOUR_GOOGLE_CLIENT_ID',
+    callback: handleCredentialResponse
+  });
+
+  google.accounts.id.renderButton(
+    document.getElementById('googleLogin'),
+    { theme: 'outline', size: 'large' }
+  );
+};
+
+
+Best practices
+
+
+Ключ API Нової Пошти зберігайте у .env файлі, а не в коді.
+
+Використовуйте HTTPS для безпечної передачі даних.
+
+Для Google Login застосовуйте серверну валідацію токена (через Google API).
+
+Забезпечте fallback автентифікації (звичайний email+пароль) на випадок, якщо Google недоступний.
+
+
+
+✅ Мета: навчитися працювати з API сторонніх сервісів, інтегрувати доставку Нова Пошта в програму та реалізовувати безпечну автентифікацію користувачів через Google.
+

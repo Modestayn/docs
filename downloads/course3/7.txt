@@ -1,0 +1,82 @@
+Урок 7 – Promise
+
+Promise – це об’єкт у JavaScript, який представляє результат асинхронної операції: виконану (fulfilled), відхилену (rejected) або ще очікувану (pending). Він дозволяє зручно працювати з асинхронним кодом без вкладених колбеків («callback hell»).
+
+
+
+Стани Promise
+
+
+pending – очікування (операція ще виконується).
+
+fulfilled – успішно виконано.
+
+rejected – сталася помилка.
+
+
+
+Створення Promise
+
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const success = true;
+    if (success) {
+      resolve('Дані завантажені');
+    } else {
+      reject('Помилка завантаження');
+    }
+  }, 1000);
+});
+
+
+Обробка результату
+
+myPromise
+  .then(result => console.log(result)) // викликається при resolve
+  .catch(error => console.error(error)) // викликається при reject
+  .finally(() => console.log('Завершено'));
+
+
+Ланцюжки Promise
+
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+
+
+Promise.all / Promise.race
+
+
+Promise.all([p1, p2]) – виконується, коли всі Promise успішні (або одразу reject при першій помилці).
+
+Promise.race([p1, p2]) – повертає результат першого Promise, який виконався.
+
+
+
+Мікротаски та макротаски
+
+
+Обробники then/catch/finally потрапляють у мікротаски (виконуються раніше за setTimeout).
+
+Події setTimeout / setInterval – це макротаски.
+
+Тому Promise.then() завжди виконається перед таймаутами, навіть якщо вони мають час 0мс.
+
+
+
+Приклад різниці
+
+console.log('Start');
+
+setTimeout(() => console.log('Макротаска'), 0);
+
+Promise.resolve().then(() => console.log('Мікротаска'));
+
+console.log('End');
+
+// Порядок: Start → End → Мікротаска → Макротаска
+
+
+✅ Мета: зрозуміти принцип роботи Promise, навчитися створювати та обробляти їх, використовувати then/catch/finally, писати ланцюжки асинхронних запитів і розуміти різницю між мікро- та макротасками.
+

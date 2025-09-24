@@ -1,0 +1,74 @@
+Урок 3 – Створення слайдера та контроль версій з Git
+
+Слайдер — це елемент інтерфейсу, який дозволяє перегортати зображення або контент. Ми поєднаємо його створення з практикою з Git, щоб навчитися фіксувати версії змін у коді.
+
+
+
+Реалізація простого слайдера
+
+<div class="slider">
+  <div class="slide active">1</div>
+  <div class="slide">2</div>
+  <div class="slide">3</div>
+  <button id="prev">◀</button>
+  <button id="next">▶</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let index = 0;
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[i].classList.add('active');
+}
+
+document.getElementById('next').onclick = () => {
+  index = (index + 1) % slides.length;
+  showSlide(index);
+}
+document.getElementById('prev').onclick = () => {
+  index = (index - 1 + slides.length) % slides.length;
+  showSlide(index);
+}
+</script>
+
+<style>
+.slider { position: relative; width: 300px; height: 200px; overflow: hidden; }
+.slide { display: none; text-align: center; font-size: 2em; line-height: 200px; }
+.slide.active { display: block; background: #eee; }
+</style>
+
+
+Практика з Git
+
+
+Ініціалізація репозиторію: git init.
+
+Додавання файлів: git add ..
+
+Створення першого коміту: git commit -m "add slider base".
+
+Створення нової гілки для фічі: git checkout -b feature/slider.
+
+Після змін — знову git add . і git commit -m "feat: slider navigation".
+
+Пушимо в GitHub: git push origin feature/slider.
+
+Створюємо Pull Request, щоб змерджити фічу в основну гілку.
+
+
+
+Поєднання теорії
+
+
+Слайдер = приклад фронтенд-фічі.
+
+Git = контроль версій, збереження історії, колаборація.
+
+Кожна зміна (наприклад, додавання кнопок або анімації) — це окремий коміт.
+
+
+
+✅ Мета: навчитися створювати простий слайдер на JavaScript, зберігати зміни через Git, організовувати роботу з гілками та Pull Request.
+

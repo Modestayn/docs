@@ -1,0 +1,65 @@
+Урок 5 – Валідація форми з JustValidate
+
+Валідація форми потрібна для перевірки правильності введених даних ще до відправки на сервер. Бібліотека JustValidate дозволяє робити це просто і зручно.
+
+
+
+Основні можливості JustValidate
+
+
+Перевірка обов’язкових полів.
+
+Валідація email, паролів, номерів телефону.
+
+Кастомні повідомлення про помилки.
+
+Можливість створення власних правил.
+
+
+
+HTML приклад
+
+<form id="signup">
+  <input type="text" name="name" placeholder="Ваше ім'я" />
+  <input type="email" name="email" placeholder="Email" />
+  <input type="password" name="password" placeholder="Пароль" />
+  <button type="submit">Надіслати</button>
+</form>
+
+
+JS приклад з JustValidate
+
+import JustValidate from 'just-validate';
+
+const validator = new JustValidate('#signup');
+
+validator
+  .addField('[name="name"]', [
+    { rule: 'required', errorMessage: 'Введіть ім’я' },
+    { rule: 'minLength', value: 3, errorMessage: 'Мінімум 3 символи' }
+  ])
+  .addField('[name="email"]', [
+    { rule: 'required', errorMessage: 'Email обов’язковий' },
+    { rule: 'email', errorMessage: 'Некоректний email' }
+  ])
+  .addField('[name="password"]', [
+    { rule: 'required', errorMessage: 'Введіть пароль' },
+    { rule: 'password', errorMessage: 'Пароль повинен містити цифри та букви' }
+  ]);
+
+
+Best practices
+
+
+Поєднуйте клієнтську та серверну валідацію (безпека перш за все).
+
+Використовуйте зрозумілі повідомлення для користувачів.
+
+Не робіть форму занадто суворою, залишайте простір для різних форматів (наприклад, телефонів).
+
+Додавайте валідацію ще на етапі UX (placeholder, підказки).
+
+
+
+✅ Мета: навчитися підключати JustValidate, додавати правила до полів форми, відображати помилки та покращувати UX користувачів.
+

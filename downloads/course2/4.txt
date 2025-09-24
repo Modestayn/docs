@@ -1,0 +1,45 @@
+Урок 4 – DOM та події
+У цьому уроці розглянемо, що таке DOM (Document Object Model), як з ним працювати, а також різні способи обробки подій у JavaScript – старі (onClick та інші атрибути) і сучасні (addEventListener).
+
+1. DOM (Document Object Model)
+DOM – це структура документа HTML, представлена у вигляді дерева об’єктів. Кожен елемент (тег, текст, атрибут) стає вузлом цього дерева. За допомогою JavaScript ми можемо знаходити, змінювати, додавати або видаляти елементи.
+
+Основні методи доступу
+document.getElementById('id') – пошук за id.
+document.querySelector('selector') – повертає перший елемент за CSS-селектором.
+document.querySelectorAll('selector') – повертає список усіх елементів.
+element.textContent / innerHTML – змінюють текст або HTML-вміст.
+element.style.property – зміна стилів напряму.
+2. Події
+Подія – це сигнал про те, що щось сталося: клік, наведення, натискання клавіші, завантаження сторінки тощо. JS дозволяє «слухати» події та реагувати на них.
+
+3. Старий підхід – обробники у вигляді атрибутів
+Можна прямо в HTML-атрибуті задати функцію для події. Наприклад:
+
+<button onclick='alert("Привіт!")'>Натисни</button>
+Або через властивість елемента:
+
+const btn = document.getElementById('myBtn'); btn.onclick = function(){ alert('Клік!'); };
+Недоліки: можна призначити лише один обробник; логіка змішується з HTML; важче масштабувати.
+
+4. Сучасний підхід – addEventListener
+Метод addEventListener дозволяє підписатися на подію, додати кілька обробників, а також налаштовувати фази виконання (capturing/bubbling).
+
+const btn = document.getElementById('myBtn'); btn.addEventListener('click', () => { console.log('Клік!'); });
+Можна зняти обробник за допомогою removeEventListener.
+
+5. Види подій
+Мишка: click, dblclick, mouseover, mouseout, contextmenu.
+Клавіатура: keydown, keyup, keypress.
+Форма: submit, input, change, focus, blur.
+Вікно/документ: load, resize, scroll.
+6. Поширення подій (event bubbling & capturing)
+Події в DOM рухаються у два етапи: спочатку вниз (capturing), потім вгору (bubbling). За замовчуванням обробники реагують на фазі bubbling, але можна ввімкнути capturing третім аргументом в addEventListener.
+
+document.getElementById('child').addEventListener('click', e => { alert('Child'); }, true);
+7. Практичні поради
+Не використовуйте inline-обробники (onclick) у сучасних проектах.
+Використовуйте addEventListener, щоб код був чистішим і підтримував кілька обробників.
+Для складних інтерфейсів застосовуйте делегування подій (встановлюйте обробник на батьківський елемент і перевіряйте event.target).
+Висновок
+DOM дозволяє динамічно змінювати сторінку, а події – реагувати на дії користувача. Старі методи (onclick) прості, але обмежені. Сучасний підхід (addEventListener) більш гнучкий, безпечний і рекомендований для використання у всіх сучасних проєктах.

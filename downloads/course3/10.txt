@@ -1,0 +1,100 @@
+Урок 10-11 – Розробка сайту з додаванням товару в корзину
+
+У цих уроках ми створимо базовий інтернет-магазин, де користувач може переглядати товари, додавати їх у корзину та зберігати дані про корзину.
+
+
+
+1) HTML структура товарів
+
+<div class="product" data-id="1" data-price="499">
+  <h3>Товар 1</h3>
+  <p>Ціна: 499 грн</p>
+  <button class="add-to-cart">Додати в корзину</button>
+</div>
+<div class="product" data-id="2" data-price="799">
+  <h3>Товар 2</h3>
+  <p>Ціна: 799 грн</p>
+  <button class="add-to-cart">Додати в корзину</button>
+</div>
+<div id="cart">
+  <h2>Корзина</h2>
+  <ul id="cart-items"></ul>
+  <p id="total">Сума: 0</p>
+</div>
+
+
+2) JS логіка додавання в корзину
+
+const cart = [];
+const cartItems = document.getElementById('cart-items');
+const totalEl = document.getElementById('total');
+
+function updateCart() {
+  cartItems.innerHTML = '';
+  let total = 0;
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.name} - ${item.price} грн x ${item.quantity}`;
+    cartItems.appendChild(li);
+    total += item.price * item.quantity;
+  });
+  totalEl.textContent = `Сума: ${total} грн`;
+  localStorage.setItem('cart', JSON.stringify(cart)); // зберігаємо корзину
+}
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const productEl = e.target.closest('.product');
+    const id = productEl.dataset.id;
+    const name = productEl.querySelector('h3').textContent;
+    const price = parseInt(productEl.dataset.price);
+    const existing = cart.find(item => item.id === id);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ id, name, price, quantity: 1 });
+    }
+    updateCart();
+  });
+});
+
+// Завантаження корзини з LocalStorage при старті
+const savedCart = JSON.parse(localStorage.getItem('cart'));
+if (savedCart) {
+  cart.push(...savedCart);
+  updateCart();
+}
+
+
+3) Додаткові можливості
+
+
+Видалення товару з корзини.
+
+Зміна кількості через + / -.
+
+Збереження стану при перезавантаженні сторінки (LocalStorage або SessionStorage).
+
+Підсумкова сума та кількість товарів.
+
+Можна додати просту анімацію при додаванні товару (CSS transition / transform).
+
+
+
+4) Best practices
+
+
+Завжди перевіряйте LocalStorage перед використанням (null або неправильний формат).
+
+Окремий модуль/клас для роботи з корзиною допомагає підтримувати код чистим.
+
+Використовуйте id товару як унікальний ключ для ефективного оновлення кількості.
+
+Синхронізуйте дані корзини з сервером при логіні користувача.
+
+Підключайте відображення кількості товарів у шапці сайту (иконка корзини) для зручності UX.
+
+
+
+✅ Мета: навчитися створювати інтерактивний каталог товарів, додавати товари в корзину, зберігати стан через LocalStorage, оновлювати кількість та суму, а також підготувати основу для інтеграції з серверною частиною (API, авторизація).
+

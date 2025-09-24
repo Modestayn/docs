@@ -42,58 +42,7 @@
             </div>
             <ul id="blog-list">
                 <!-- === Blog code === -->
-                <li>
-                    <strong>Питання - відповідь</strong>
-                    <span>2025-09-22</span>
-                    <h2>HTML + CSS Code:</h2>
-                    <pre><code>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="uk"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;style&gt;
-    .box {
-      width: 300px;
-      height: 200px;
-      background: lightblue;
-    }
 
-    /* Mobile */
-    @media (max-width: 480px) {
-      .box {
-        width: 100%;
-        background: lightcoral;
-      }
-    }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="box"&gt;Адаптивний блок&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-    </code></pre>
-                    <p>
-                        HTML + CSS. Який колір фону буде у блоку, якщо відкрити сторінку на екрані шириною 400px?
-                    </p>
-                    <button class="back-btn" data-action="accordion">Відповідь</button>
-                    <br><br>
-                    <p class="answer">
-                        <button style="margin-bottom: 10px;" class="back-btn" data-action="accordion-close">Закрити</button>
-                        <br>
-                        Що робить код:
-                        <br><br>
-                        - Є блок з класом <code>.box</code>, за замовчуванням він має ширину 300px і фон <b>lightblue</b>.
-                        - Додається медіа-запит <code>@media (max-width: 480px)</code>, який змінює стилі для екранів до 480px шириною.
-                        - У цьому випадку блок отримує <code>width: 100%</code> і фон <b>lightcoral</b>.
-                        <br><br>
-                        Чому саме такий результат:
-                        <br>
-                        - При ширині екрану 400px умова <code>(max-width: 480px)</code> виконується.
-                        - Тому застосовуються стилі з медіа-запиту.
-                        - Отже, фон блоку буде <b>lightcoral</b>.
-                    </p>
-                </li>
                 <li>
                     <strong>Адаптивність сайту: meta-теги та media queries</strong>
                     <span>2025-09-22</span>

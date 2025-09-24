@@ -1,0 +1,94 @@
+Урок 14 – React компоненти та useState
+
+У цьому уроці ми розглянемо, як створювати компоненти у React та використовувати хук useState для керування станом компонентів.
+
+
+
+1. Компоненти React
+
+
+Компонент – це функція або клас, який повертає JSX (HTML-подібний синтаксис у JS).
+
+Вони дозволяють створювати повторно використовувані частини інтерфейсу.
+
+Приклад функціонального компоненту:
+
+
+function Header() {
+  return <h1>Привіт, React!</h1>;
+}
+
+export default Header;
+
+
+2. Props – передача даних у компоненти
+
+function Product(props) {
+  return <div>Назва: {props.name} - Ціна: {props.price}</div>;
+}
+
+// Використання
+<Product name="Товар 1" price={499} />
+
+
+3. useState – керування станом
+
+
+useState дозволяє зберігати внутрішній стан компоненту.
+
+Повертає масив з поточного стану та функції для його оновлення.
+
+При зміні стану React автоматично рендерить компонент заново.
+
+
+
+Приклад лічильника:
+
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Кількість: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Додати</button>
+      <button onClick={() => setCount(count - 1)}>Відняти</button>
+    </div>
+  );
+}
+
+export default Counter;
+
+
+4. Використання кількох станів
+
+function Form() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  return (
+    <form>
+      <input value={name} onChange={e => setName(e.target.value)} placeholder="Ім'я" />
+      <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+    </form>
+  );
+}
+
+
+5. Best practices
+
+
+Використовуйте маленькі, повторно використовувані компоненти.
+
+Стан повинен бути локальним для компонента, який його використовує.
+
+Для складних станів можна використовувати useReducer або глобальні стейт-менеджери.
+
+Назви станів та функцій оновлення повинні бути зрозумілими.
+
+
+
+✅ Мета: навчитися створювати функціональні компоненти, передавати дані через props та керувати станом за допомогою useState, що є основою для динамічного UI у React.
+
+

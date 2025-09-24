@@ -1,0 +1,88 @@
+Урок 15 – React Router
+
+У цьому уроці ми розглянемо, як організувати маршрутизацію у React за допомогою бібліотеки react-router-dom, щоб створювати багатосторінкові додатки без перезавантаження сторінки.
+
+
+
+1. Встановлення React Router
+
+npm install react-router-dom
+
+
+2. Основні компоненти React Router
+
+
+BrowserRouter – обгортка для всіх маршрутов, яка використовує історію браузера.
+
+Routes – контейнер для списку маршрутов.
+
+Route – визначає шлях і компонент, який рендериться на цьому шляху.
+
+Link – навігаційна посилання без перезавантаження сторінки.
+
+
+
+3. Приклад базової маршрутизації
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Головна</Link> | 
+        <Link to="/about">Про нас</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+4. Динамічні маршрути
+
+import { useParams } from 'react-router-dom';
+
+function ProductPage() {
+  const { id } = useParams();
+  return <div>Сторінка товару з ID: {id}</div>;
+}
+
+// Використання: <Route path="/product/:id" element={<ProductPage />} />
+
+
+5. Навігація програмно
+
+import { useNavigate } from 'react-router-dom';
+
+function Home() {
+  const navigate = useNavigate();
+  return <button onClick={() => navigate('/about')}>Перейти на About</button>;
+}
+
+
+6. Best practices
+
+
+Використовуйте семантичні посилання через Link замість <a>.
+
+Динамічні маршрути робіть через useParams.
+
+Програмну навігацію робіть через useNavigate.
+
+Організовуйте маршрути у окремому файлі для чистоти коду.
+
+Для складних проектів можна використовувати Outlet для вкладених маршрутів.
+
+
+
+✅ Мета: навчитися створювати багатосторінкові React-додатки, організовувати маршрути, використовувати динамічні маршрути та програмну навігацію для зручності користувача.
+
+

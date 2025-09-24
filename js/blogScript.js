@@ -1,55 +1,87 @@
-// =====================
-// Blog Search + Pagination
-// =====================
+document.addEventListener('DOMContentLoaded', function() {
 
-const searchInput = document.querySelector('.blog-search');
-const allPosts = Array.from(document.querySelectorAll('#blog-list li'));
-const pagination = document.getElementById('pagination');
-const postsPerPage = 3;
+    const searchInput = document.querySelector('.blog-search');
+    const blogList = document.getElementById('blog-list');
+    const pagination = document.getElementById('pagination');
 
-let filteredPosts = [...allPosts];
-let currentPage = 1;
+    if (!searchInput || !blogList || !pagination) return;
 
-function showPage(page) {
-    currentPage = page;
-    const start = (page - 1) * postsPerPage;
-    const end = start + postsPerPage;
+    // Берем только прямых детей <li> в #blog-list
+    const allPosts = Array.from(blogList.children).filter(el => el.tagName === 'LI');
 
-    allPosts.forEach(post => post.style.display = 'none');
+    console.log('Найдено постов:', allPosts.length);
 
-    filteredPosts.slice(start, end).forEach(post => {
-        post.style.display = 'block';
-    });
+    const postsPerPage = 3;
+    let filteredPosts = [...allPosts];
+    let currentPage = 1;
 
-    updatePaginationButtons();
-}
+    const noResults = document.createElement('p');
+    noResults.textContent = 'Ничего не найдено';
+    noResults.style.display = 'none';
+    noResults.style.textAlign = 'center';
+    noResults.style.color = '#666';
+    noResults.style.fontSize = '18px';
+    noResults.style.margin = '20px 0';
+    blogList.after(noResults);
 
-function updatePaginationButtons() {
-    pagination.innerHTML = '';
-    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-    if (totalPages === 0) return;
+    function showPage(page) {
+        currentPage = page;
+        const start = (page - 1) * postsPerPage;
+        const end = start + postsPerPage;
 
-    for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.classList.toggle('active', i === currentPage);
-        btn.addEventListener('click', () => showPage(i));
-        pagination.appendChild(btn);
+        allPosts.forEach(post => post.style.display = 'none');
+
+        if (filteredPosts.length === 0) {
+            noResults.style.display = 'block';
+            pagination.innerHTML = '';
+            return;
+        } else {
+            noResults.style.display = 'none';
+        }
+
+        const postsToShow = filteredPosts.slice(start, end);
+        postsToShow.forEach(post => post.style.display = 'block');
+
+        updatePagination();
     }
-}
 
-function filterPosts(query) {
-    filteredPosts = allPosts.filter(post => {
-        const title = post.querySelector('strong').textContent.toLowerCase();
-        const content = post.textContent.toLowerCase();
-        return title.includes(query) || content.includes(query);
+    function updatePagination() {
+        pagination.innerHTML = '';
+        const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+        if (totalPages <= 1) return;
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            if (i === currentPage) btn.classList.add('active');
+            btn.addEventListener('click', () => showPage(i));
+            pagination.appendChild(btn);
+        }
+    }
+
+    function filterPosts(query) {
+        const term = query.toLowerCase().trim();
+        if (!term) {
+            filteredPosts = [...allPosts];
+            return;
+        }
+
+        filteredPosts = allPosts.filter(post => {
+            const title = post.querySelector('strong')?.textContent?.toLowerCase() || '';
+            const text = post.textContent?.toLowerCase() || '';
+            return title.includes(term) || text.includes(term);
+        });
+    }
+
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            filterPosts(this.value);
+            showPage(1);
+        }, 300);
     });
-}
 
-searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    filterPosts(query);
     showPage(1);
+    console.log('Blog script инициализирован');
 });
-
-showPage(1);
