@@ -6,45 +6,6 @@
     <title>Help – Download</title>
     <link rel="icon" type="image/png" href="img/logo.png" />
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            background-color: #111;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-        .accordion {
-            background-color: #222;
-            color: #fff;
-            cursor: pointer;
-            padding: 15px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 18px;
-            transition: 0.3s;
-            margin-top: 5px;
-        }
-        .accordion.active {
-            background-color: #444;
-        }
-        .panel {
-            padding: 0 15px;
-            display: none;
-            background-color: #333;
-            overflow: hidden;
-        }
-        .file {
-            padding: 5px 0;
-        }
-        .file a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .file a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
 <span class="beta-test" title="Beta version information">
@@ -150,11 +111,19 @@
 <script src="js/anim.js"></script>
 <script>
     const acc = document.getElementsByClassName("accordion");
+
     for (let i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
             this.classList.toggle("active");
             const panel = this.nextElementSibling;
-            panel.style.display = (panel.style.display === "block") ? "none" : "block";
+
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+                panel.style.padding = "0"; // полностью убираем отступы
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.style.padding = "0"; // тоже убираем отступы
+            }
         });
     }
 </script>
