@@ -44,6 +44,101 @@
             <ul id="blog-list">
                 <!-- === Blog code === -->
                 <li>
+                    <strong>Шпаргалка по шрифтам та CSS</strong>
+                    <span>2025-10-17</span>
+
+                    <p>
+                        Якщо ви працюєте з веб-дизайном або версткою, важливо знати, як правильно підключати шрифти та управляти їхніми властивостями. Ось базові інструменти та поради.
+                    </p>
+
+                    <h3>Корисні ресурси:</h3>
+                    <ul>
+                        <li>Каталог шрифтів: <a href="https://nomail.com.ua/" target="_blank">nomail.com.ua</a></li>
+                        <li>Google Fonts: <a href="https://fonts.google.com/" target="_blank">fonts.google.com</a></li>
+                        <li>Конвертер шрифтів: <a href="http://www.font2web.com/" target="_blank">font2web.com</a></li>
+                    </ul>
+
+                    <h3>Підключення шрифтів через @font-face</h3>
+                    <pre>
+@font-face {
+    font-family: 'Назва шрифта';
+    font-display: swap;
+    src: url("../fonts/файл_шрифта.eot");
+    src: local("O"),
+         url("../fonts/файл_шрифта.woff") format("woff"),
+         url("../fonts/файл_шрифта.ttf") format("truetype"),
+         url("../fonts/файл_шрифта.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+    </pre>
+
+                    <h3>Властивості шрифтів</h3>
+                    <p><b>font-family</b> — встановлює сімейство шрифта. Типи:</p>
+                    <ul>
+                        <li><i>serif</i> — шрифти з зарубками (Times)</li>
+                        <li><i>sans-serif</i> — рублені шрифти (Arial)</li>
+                        <li><i>cursive</i> — курсивні шрифти</li>
+                        <li><i>fantasy</i> — декоративні шрифти</li>
+                        <li><i>monospace</i> — моношрифти, однакова ширина символів (Courier)</li>
+                    </ul>
+
+                    <p><b>font-weight</b> — насиченість шрифта:</p>
+                    <ul>
+                        <li>100 - thin</li>
+                        <li>200 - UltraLite</li>
+                        <li>300 - lite</li>
+                        <li>400 - normal</li>
+                        <li>500 - medium</li>
+                        <li>600 - semibold</li>
+                        <li>700 - bold</li>
+                        <li>800 - Heavy</li>
+                        <li>900 - black</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Лайфхаки для економії під час навчання</strong>
+                    <span>2025-10-17</span>
+                    <p>
+                        Навчання в академії чи самостійна підготовка — це завжди інвестиція. Але можна зекономити.
+                    </p>
+                    <p>
+                        • Використовуйте <b>студентські знижки</b> (Spotify, Netflix, IDE).<br>
+                        • Купуйте курси на знижках (Udemy має великі сейли).<br>
+                        • Об’єднуйтесь у <b>групи</b> для підписок і спільної оренди коворкінгу.
+                    </p>
+                    <p>
+                        І пам’ятайте: найбільша економія — безкоштовні ресурси (MDN, FreeCodeCamp, YouTube).
+                    </p>
+
+                    <hr>
+
+                    <strong>CSS-поради для тексту та шрифтів</strong>
+                    <p>
+                        <b>font-family</b> — задає сімейство шрифта. Типи: <i>serif</i> (з засічками, Times),
+                        <i>sans-serif</i> (без засічок, Arial), <i>cursive</i> (курсив), <i>fantasy</i> (декоративні),
+                        <i>monospace</i> (моношрифти, Courier).
+                    </p>
+                    <p>
+                        <b>font-size</b> — розмір шрифта.<br>
+                        <b>font-style</b> — начертання: normal (звичайне), italic (курсив), oblique (нахил).<br>
+                        <b>font-weight</b> — насиченість: 100–900 (thin → black).
+                    </p>
+                    <p>
+                        <b>color</b> — колір тексту (hex або RGB).<br>
+                        <b>text-align</b> — вирівнювання: left, right, center, justify.<br>
+                        <b>text-decoration</b> — підкреслення, перекреслення: underline, line-through, overline, none.<br>
+                        <b>text-shadow</b> — тінь: горизонтальне_зсув вертикальне_зсув розмір колір.<br>
+                        <b>text-transform</b> — регістр: capitalize, lowercase, uppercase, none.<br>
+                        <b>text-indent</b> — відступ першого рядка.<br>
+                        <b>letter-spacing</b> — інтервал між буквами.<br>
+                        <b>line-height</b> — міжрядковий інтервал.<br>
+                        <b>white-space</b> — обробка пробілів: normal, nowrap.<br>
+                        <b>word-spacing</b> — інтервал між словами.
+                    </p>
+                </li>
+
+                <li>
                     <strong>React Router DOM: навігація у React</strong>
                     <span>2025-09-25</span>
                     <p>
