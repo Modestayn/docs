@@ -505,6 +505,7 @@ a {
     color: #e0e0e0;
 }
 .explorer__support {
+    position: relative;
     background: #1a1c2b;
     border: 1px solid #ddd;
     border-radius: 12px;
@@ -513,7 +514,18 @@ a {
     margin: 20px auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.no-bg-img {
+    position: absolute;
+    right: -30px;
+    top: 70px;
+    transform: rotate(15deg);
+    z-index: 1;
+}
+@media (max-width: 605px) {
+    .no-bg-img {
+        display: none;
+    }
+}
 .explorer__support h2,
 .explorer__support h3 {
     margin-left: 10px;

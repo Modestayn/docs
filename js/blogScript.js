@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Берем только прямых детей <li> в #blog-list
     const allPosts = Array.from(blogList.children).filter(el => el.tagName === 'LI');
 
-    console.log('Найдено постов:', allPosts.length);
+    console.log('Знайдено постів:', allPosts.length);
 
     const postsPerPage = 3;
     let filteredPosts = [...allPosts];
     let currentPage = 1;
 
     const noResults = document.createElement('p');
-    noResults.textContent = 'Ничего не найдено';
+    noResults.textContent = 'Упппс ... Нічого не знайдено';
     noResults.style.display = 'none';
     noResults.style.textAlign = 'center';
     noResults.style.color = '#666';
@@ -83,5 +83,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     showPage(1);
-    console.log('Blog script инициализирован');
+    console.log('Blog script ініціалізація');
 });
