@@ -1,0 +1,91 @@
+Урок 8–9 – Task Manager: drag-and-drop функціонал із dnd-kit та переміщення задач між списками
+У цьому уроці студенти створять Task Manager із підтримкою drag-and-drop для переміщення задач між різними колонками (наприклад, To Do, In Progress, Done). Для цього використовується сучасна бібліотека dnd-kit, яка надає простий API для побудови гнучких систем перетягування.
+
+Основні можливості:
+Реалізація drag-and-drop функціоналу за допомогою dnd-kit.
+Переміщення задач між списками.
+Управління станом через Zustand або локальний state.
+Динамічна візуальна взаємодія без стороннього сервера.
+Приклад:
+import React from 'react';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { create } from 'zustand';
+
+const useTaskStore = create((set) => ({
+  columns: {
+    todo: ['Підготувати звіт', 'Зробити ревʼю коду'],
+    progress: ['Створити макет UI'],
+    done: ['Налаштувати ESLint']
+  },
+  moveTask: (from, to, task) => set((state) => {
+    const newFrom = state.columns[from].filter((t) => t !== task);
+    const newTo = [...state.columns[to], task];
+    return { columns: { ...state.columns, [from]: newFrom, [to]: newTo } };
+  })
+}));
+
+function SortableItem({ id }) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+  const style = { transform: CSS.Transform.toString(transform), transition };
+  return 
+{id}
+;
+}
+
+function Column({ id, tasks }) {
+  return (
+    
+
+      
+{id.toUpperCase()}
+
+      
+        {tasks.map((task) => ())}
+      
+    
+
+  );
+}
+
+export default function TaskManager() {
+  const { columns, moveTask } = useTaskStore();
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (!over) return;
+    const from = Object.keys(columns).find((key) => columns[key].includes(active.id));
+    const to = over.id;
+    if (from && to && from !== to) moveTask(from, to, active.id);
+  };
+
+  return (
+    
+
+      
+🧩 Task Manager
+
+      
+        
+
+          {Object.entries(columns).map(([key, tasks]) => (
+            
+
+              
+            
+
+          ))}
+        
+
+      
+    
+
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Використовувати бібліотеку dnd-kit для drag-and-drop у React.
+Розуміти принципи сортування та переміщення елементів між списками.
+Інтегрувати drag-and-drop із глобальним станом (Zustand).
+Створювати інтерактивні інтерфейси з візуальним фідбеком.

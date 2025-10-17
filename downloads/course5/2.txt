@@ -1,0 +1,28 @@
+Урок 2 – Tanstack Query: робота з асинхронними даними, кешування та запити
+Tanstack Query (раніше React Query) — це потужна бібліотека для керування асинхронними запитами та кешем у React-застосунках. Вона спрощує отримання, оновлення і повторне використання даних із серверів або API.
+
+Основні можливості:
+Автоматичне кешування результатів запитів.
+Повторне отримання даних при фокусі на вікні.
+Індикація станів запиту: loading, error, success.
+Оновлення даних без ручного виклику fetch.
+Приклад:
+import React from 'react'; import { useQuery, QueryClient, QueryClientProvider } from '@tanstack/react-query'; const client = new QueryClient(); function Todos(){ const { data, error, isLoading } = useQuery({ queryKey: ['todos'], queryFn: async () => { const res = await fetch('https://jsonplaceholder.typicode.com/todos'); return res.json(); } }); if(isLoading) return 
+Завантаження...
+
+; if(error) return 
+Помилка: {error.message}
+
+; return (
+{data.slice(0,5).map(todo => 
+{todo.title}
+)}
+); } export default function App(){ return (
+Список завдань
+); }
+✅ Мета: студенти повинні навчитися:
+
+Використовувати useQuery для отримання даних.
+Розуміти механізм кешування та повторного отримання.
+Будувати UI, який реагує на різні стани запиту.
+Застосовувати QueryClientProvider для глобального керування даними.

@@ -1,0 +1,7 @@
+Урок 7 – Task Manager (dnd-kit)
+
+Реалізуй drag-and-drop переміщення задач між списками: “To Do”, “In Progress”, “Done”.
+
+Використай dnd-kit для перетягування.
+
+Збережи стан у Zustand або Redux Toolkit.

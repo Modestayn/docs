@@ -1,0 +1,71 @@
+Урок 4 – Todo App без сервера: закріплення Zustand, передача пропсів і структура компонентів
+У цьому уроці студенти створять невеликий застосунок Todo App без бекенду, щоб закріпити знання про Zustand, роботу з компонентами та передачу пропсів. Це чудова практика для структурування коду і управління станом на рівні всього застосунку.
+
+Основні можливості:
+Створення глобального стану для списку завдань через Zustand.
+Передача пропсів між компонентами.
+Організація структури застосунку на кілька компонентів.
+Збереження стану у памʼяті браузера (опціонально через persist middleware).
+Приклад:
+import { create } from 'zustand';
+
+const useTodoStore = create((set) => ({
+  todos: [],
+  addTodo: (text) => set((state) => ({ todos: [...state.todos, { id: Date.now(), text, done: false }] })),
+  toggleTodo: (id) => set((state) => ({ todos: state.todos.map(t => t.id === id ? { ...t, done: !t.done } : t) })),
+  removeTodo: (id) => set((state) => ({ todos: state.todos.filter(t => t.id !== id) })),
+}));
+
+function TodoItem({ todo, onToggle, onRemove }) {
+  return (
+    
+
+      {todo.text}
+       onToggle(todo.id)}>✓
+       onRemove(todo.id)}>✕
+    
+
+  );
+}
+
+function TodoList() {
+  const { todos, toggleTodo, removeTodo } = useTodoStore();
+  return 
+{todos.map(todo => )}
+;
+}
+
+function AddTodo() {
+  const [text, setText] = React.useState('');
+  const addTodo = useTodoStore((state) => state.addTodo);
+  return (
+    
+
+      
+{text}
+ setText(e.target.value)} placeholder='Нове завдання' />
+       { if (text) addTodo(text); setText(''); }}>Додати
+    
+
+  );
+}
+
+export default function TodoApp() {
+  return (
+    
+
+      
+Мій Todo App
+
+      
+      
+    
+
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Застосовувати Zustand для управління списками даних.
+Розділяти UI на логічні компоненти.
+Передавати пропси між компонентами для взаємодії.
+Розуміти, як організувати структуру застосунку без сервера.

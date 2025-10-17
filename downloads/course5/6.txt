@@ -1,0 +1,71 @@
+Урок 6–7 – Watchlist App: створення застосунку зі списком фільмів та анімаціями через Framer Motion
+У цьому уроці студенти створять Watchlist App — застосунок для збереження улюблених фільмів у список перегляду. Основна мета — навчитися поєднувати керування станом із візуальними анімаціями за допомогою Framer Motion.
+
+Основні можливості:
+Створення списку фільмів (watchlist) із можливістю додавання та видалення.
+Анімація появи, видалення та наведення елементів через Framer Motion.
+Зберігання списку у локальному стані або Zustand.
+Практика створення компонентів і побудови динамічного інтерфейсу.
+Приклад:
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { create } from 'zustand';
+
+const useWatchlist = create((set) => ({
+  movies: [],
+  addMovie: (title) => set((state) => ({ movies: [...state.movies, { id: Date.now(), title }] })),
+  removeMovie: (id) => set((state) => ({ movies: state.movies.filter(m => m.id !== id) })),
+}));
+
+function MovieItem({ movie, onRemove }) {
+  return (
+    
+      {movie.title}
+       onRemove(movie.id)}>✕
+    
+  );
+}
+
+function Watchlist() {
+  const { movies, removeMovie } = useWatchlist();
+  return (
+    
+
+      
+        {movies.map((m) => (
+          
+        ))}
+      
+    
+
+  );
+}
+
+function AddMovie() {
+  const [title, setTitle] = React.useState('');
+  const addMovie = useWatchlist((state) => state.addMovie);
+  return (
+    
+
+      
+{title}
+ setTitle(e.target.value)} placeholder='Назва фільму' />
+       { if (title) addMovie(title); setTitle(''); }}>Додати
+    
+
+  );
+}
+
+export default function WatchlistApp() {
+  return (
+    
+
+      
+🎬 Watchlist App
+
+      
+      
+    
+
+  );
+}

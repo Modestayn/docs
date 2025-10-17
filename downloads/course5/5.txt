@@ -1,0 +1,65 @@
+Урок 5 – ShadCN UI + Redux Toolkit: компоненти UI бібліотеки та базовий менеджер стану
+У цьому уроці студенти познайомляться з ShadCN UI — сучасною бібліотекою компонентів для React, а також навчаться використовувати Redux Toolkit для управління глобальним станом. Поєднання цих технологій дозволяє створювати стильні та керовані застосунки.
+
+Основні можливості:
+Встановлення та використання компонентів із ShadCN UI.
+Створення сховища стану за допомогою Redux Toolkit.
+Підключення Provider для доступу до стану в усьому застосунку.
+Звʼязок UI з Redux через useSelector і useDispatch.
+Приклад:
+import React from 'react';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { Button } from '@/components/ui/button';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state) => { state.value += 1; },
+    decrement: (state) => { state.value -= 1; }
+  }
+});
+
+const store = configureStore({ reducer: { counter: counterSlice.reducer } });
+
+function Counter() {
+  const dispatch = useDispatch();
+  const count = useSelector((state) => state.counter.value);
+  return (
+    
+
+      
+Лічильник: {count}
+
+      
+
+         dispatch(counterSlice.actions.increment())}>+
+         dispatch(counterSlice.actions.decrement())}>-
+      
+
+    
+
+  );
+}
+
+export default function App() {
+  return (
+    
+      
+
+        
+ShadCN + Redux Toolkit
+
+        
+      
+
+    
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Підключати ShadCN UI та використовувати його компоненти.
+Налаштовувати Redux Toolkit для управління станом.
+Використовувати Provider, useSelector і useDispatch.
+Поєднувати сучасний UI з керуванням станом у React-застосунках.

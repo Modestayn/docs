@@ -1,0 +1,55 @@
+Урок 14 – Speed Booster: оптимізація продуктивності через lazy loading, мемоізацію та Suspense
+У цьому уроці студенти дізнаються, як підвищити продуктивність React-застосунків за допомогою lazy loading, React.memo, useMemo, useCallback і Suspense. Ці інструменти допомагають скоротити час завантаження, зменшити кількість непотрібних рендерів і зробити роботу інтерфейсу плавнішою.
+
+Основні можливості:
+Використання React.lazy() і Suspense для динамічного імпорту компонентів.
+Оптимізація повторних рендерів через React.memo.
+Мемоізація обчислень і колбеків (useMemo, useCallback).
+Покращення UX через Skeleton або fallback-завантажувачі.
+Приклад:
+import React, { Suspense, useState, useMemo, useCallback } from 'react';
+
+const HeavyChart = React.lazy(() => import('./HeavyChart'));
+
+function ExpensiveList({ items }) {
+  console.log('Рендер списку');
+  const sorted = useMemo(() => [...items].sort(), [items]);
+  return 
+{sorted.map((i) => 
+{i}
+)}
+;
+}
+
+const MemoList = React.memo(ExpensiveList);
+
+export default function SpeedBooster() {
+  const [count, setCount] = useState(0);
+  const [data] = useState(['Банан', 'Апельсин', 'Яблуко']);
+
+  const increment = useCallback(() => setCount((c) => c + 1), []);
+
+  return (
+    
+
+      
+⚡ Speed Booster
+
+      Клікни ({count})
+
+      Завантаження графіка...
+}>
+        
+      
+
+      
+    
+
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Використовувати lazy loading для асинхронного підвантаження компонентів.
+Застосовувати мемоізацію для оптимізації обчислень і уникнення зайвих рендерів.
+Працювати з Suspense і fallback-станами для покращення UX.
+Розуміти різницю між оптимізацією рендерів та оптимізацією обчислень.
