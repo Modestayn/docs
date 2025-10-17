@@ -1,0 +1,45 @@
+Урок 10 – i18Next: Локалізація React-застосунків
+i18Next — потужна бібліотека для реалізації багатомовності у React-проєктах. Вона дозволяє динамічно змінювати мову, підвантажувати переклади та керувати форматуванням чисел, дат і часу.
+
+Основні концепції:
+Структура перекладів: JSON-файли для кожної мови (en.json, uk.json).
+Ініціалізація i18Next через initReactI18next та налаштування fallbackLng, defaultNS, resources.
+Хук useTranslation() для отримання функції t() в компонентах.
+Динамічна зміна мови через i18n.changeLanguage('uk').
+Форматування чисел, валют, дат і часу за допомогою i18next.format() та react-i18next.
+Приклад:
+// i18n.js
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import en from './locales/en.json';
+import uk from './locales/uk.json';
+
+i18n.use(initReactI18next).init({
+  resources: { en: { translation: en }, uk: { translation: uk } },
+  lng: 'uk',
+  fallbackLng: 'en',
+  interpolation: { escapeValue: false },
+});
+
+export default i18n;
+
+// App.jsx
+import { useTranslation } from 'react-i18next';
+
+function App() {
+  const { t, i18n } = useTranslation();
+  return (
+    <div>
+      <h1>{t('welcome')} </h1>
+      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+      <button onClick={() => i18n.changeLanguage('uk')}>UK</button>
+    </div>
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Ініціалізувати i18Next у React-проєкті.
+Створювати та організовувати JSON-файли перекладів для різних мов.
+Використовувати useTranslation та функцію t() у компонентах.
+Динамічно змінювати мову інтерфейсу.
+Локалізувати числа, дати та інші формати з урахуванням регіональних налаштувань.

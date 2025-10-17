@@ -1,0 +1,69 @@
+Урок 3 – Просунуті React Hooks: useMemo, useCallback, useContext, useReducer, Custom Hooks
+Просунуті хуки дозволяють контролювати продуктивність, створювати гнучку архітектуру стану та повторно використовувати логіку між компонентами. Вони розкривають справжню силу React.
+
+Основні концепції:
+useMemo — мемоізує обчислення, щоб уникати зайвих перерахунків.
+useCallback — мемоізує функції, щоб не створювати нові при кожному рендері.
+useContext — дозволяє передавати дані через дерево компонентів без props.
+useReducer — альтернатива useState для складної логіки зміни стану.
+Custom Hooks — створення власних хуків для повторного використання логіки (імена завжди починаються з use).
+Приклад:
+import { useState, useMemo, useCallback, useReducer, useContext, createContext } from 'react';
+
+// Context приклад
+const ThemeContext = createContext('light');
+
+// Reducer приклад
+function reducer(state, action) {
+  switch (action.type) {
+    case 'inc': return { count: state.count + 1 };
+    case 'dec': return { count: state.count - 1 };
+    default: return state;
+  }
+}
+
+function AdvancedHooks() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  const [theme, setTheme] = useState('light');
+
+  const expensiveValue = useMemo(() => state.count * 10, [state.count]);
+  const toggleTheme = useCallback(() => setTheme(prev => prev === 'light' ? 'dark' : 'light'), []);
+
+  return (
+    
+      
+
+        
+Лічильник: {state.count}
+
+
+        
+Мемоізоване значення: {expensiveValue}
+
+
+         dispatch({ type: 'inc' })}>+
+         dispatch({ type: 'dec' })}>-
+        Змінити тему
+      
+
+    
+  );
+}
+
+// Custom Hook приклад
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return width;
+}
+✅ Мета: студенти повинні навчитися:
+
+Оптимізувати продуктивність через useMemo та useCallback.
+Використовувати useContext для глобального стану без props drilling.
+Керувати складним станом через useReducer.
+Створювати власні Custom Hooks для повторного використання логіки.
+Розуміти, як хуки взаємодіють і впливають на життєвий цикл компонентів.

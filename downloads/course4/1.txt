@@ -1,0 +1,42 @@
+Урок 1 – TypeScript: Повне занурення у типізацію та архітектуру
+TypeScript — це мова, що розширює JavaScript, додаючи статичну типізацію, підтримку ООП, інтерфейси, generics і покращені інструменти для масштабованих проєктів. Його мета — зробити код безпечнішим, зрозумілішим і передбачуваним.
+
+Основні концепції:
+Базові типи: string, number, boolean, null, undefined, any, unknown, void, never.
+Складні типи: масиви, об’єкти, функції, кортежі (tuples) — const user: [string, number] = ['Artem', 22].
+Union та Intersection типи: type Result = string | number, type Extended = A & B.
+Type Aliases та Interfaces: гнучкі інструменти опису структури даних. Інтерфейси можна розширювати, типи — комбінувати.
+Generics: параметризація типів для універсальних функцій та класів — function identity<T>(arg: T): T { return arg }.
+Generic Constraints: <T extends object>, <T extends keyof U> — обмеження для контролю типів.
+Utility Types: Partial, Required, Pick, Omit, Exclude, Extract, Record, ReturnType, Readonly, NonNullable — готові для маніпуляцій типами.
+Type Guards: перевірка типів у рантаймі — typeof, instanceof, in та користувацькі функції типу isUser(value): value is User.
+Enum-и: зручні для констант — enum Role { Admin, User, Guest }.
+Класи: модифікатори public, private, protected, readonly, абстрактні класи, наслідування.
+Namespaces та Modules: поділ коду для підтримки великої архітектури.
+Keyof, Indexed Access, Conditional Types: keyof T, T[K], T extends U ? X : Y, infer — просунуті інструменти типізації.
+Приклад:
+interface User { id: number; name: string; role?: 'admin' | 'user'; }
+
+type ApiResponse<T> = { success: boolean; data: T };
+
+function fetchUser<T extends User>(user: T): ApiResponse<T> {
+    console.log(`Отримано користувача: ${user.name}`);
+    return { success: true, data: user };
+}
+
+const artem = { id: 1, name: 'Артем', role: 'admin' };
+const result = fetchUser(artem);
+console.log(result.data.name);
+
+// Utility типи
+interface Post { title: string; views: number; }
+const draft: Partial<Post> = { title: 'Нова стаття' };
+
+type RoleNames = keyof typeof Role; // 'Admin' | 'User' | 'Guest'
+✅ Мета: студенти повинні навчитися:
+
+Використовувати всі основні та просунуті типи.
+Створювати гнучкі generics з обмеженнями.
+Розуміти різницю між type, interface, enum та class.
+Застосовувати conditional, mapped та utility типи.
+Оптимізувати великі проєкти через типізацію, модулі та архітектуру коду.

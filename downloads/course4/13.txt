@@ -1,0 +1,47 @@
+Урок 13 – Анімації у React за допомогою Framer Motion
+Framer Motion — потужна бібліотека для створення плавних анімацій у React. Вона дозволяє анімувати компоненти без складних CSS, керувати станами анімацій та створювати інтерактивний UX.
+
+Основні концепції:
+Компоненти motion.div, motion.button для анімації елементів.
+Властивості анімацій: animate, initial, exit.
+Транзіції через transition (duration, delay, ease).
+Анімація при hover та tap через whileHover, whileTap.
+Контейнерні анімації та staggered effects через AnimatePresence для додавання/видалення компонентів з анімацією.
+Приклад:
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+
+function AnimatedCard({ show }) {
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
+          style={{ background: '#f0f0f0', padding: '20px', borderRadius: '8px', margin: '10px' }}
+        >
+          Привіт, я анімований!
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export default function App() {
+  const [show, setShow] = useState(true);
+  return (
+    <div>
+      <button onClick={() => setShow(prev => !prev)}>Toggle Card</button>
+      <AnimatedCard show={show} />
+    </div>
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Створювати плавні анімації у React-компонентах за допомогою Framer Motion.
+Використовувати motion компоненти та властивості initial, animate, exit.
+Керувати транзіціями та ефектами hover/tap.
+Анімувати додавання і видалення елементів через AnimatePresence.
+Створювати інтерактивний та приємний UX без складного CSS.

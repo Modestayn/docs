@@ -1,0 +1,94 @@
+Урок 7 – RTK (Redux Toolkit) + React Router DOM
+
+У цьому уроці розглянемо, як правильно поєднати Redux Toolkit для управління станом і React Router DOM для маршрутизації. Це основа побудови масштабованих React-застосунків.
+
+
+
+Redux Toolkit – основи:
+
+
+Створення slice з createSlice().
+
+Використання configureStore() для збирання store.
+
+Підключення store через <Provider>.
+
+Отримання даних з useSelector() та виклики екшенів через useDispatch().
+
+Асинхронні операції за допомогою createAsyncThunk().
+
+
+
+React Router DOM – навігація:
+
+
+Налаштування маршрутизації з createBrowserRouter або <BrowserRouter>.
+
+Використання <Routes> та <Route> для структури сторінок.
+
+Перехід між сторінками за допомогою useNavigate() або <Link>.
+
+Параметри маршруту: useParams().
+
+Захищені маршрути через умовний рендеринг або кастомний компонент ProtectedRoute.
+
+
+
+Приклад:
+
+// store.js
+import { configureStore, createSlice } from '@reduxjs/toolkit'
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state) => { state.value += 1 },
+    decrement: (state) => { state.value -= 1 }
+  }
+})
+
+export const { increment, decrement } = counterSlice.actions
+export const store = configureStore({ reducer: { counter: counterSlice.reducer } })
+
+// App.jsx
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { store, increment } from './store'
+
+function Home() {
+  const value = useSelector(s => s.counter.value)
+  const dispatch = useDispatch()
+  return <div><h2>Home: {value}</h2><button onClick={() => dispatch(increment())}>+</button></div>
+}
+
+function About() { return <h2>About Page</h2> }
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <nav><Link to='/'>Home</Link> | <Link to='/about'>About</Link></nav>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  )
+}
+
+
+✅ Мета: студенти повинні навчитися:
+
+
+
+Налаштовувати Redux Toolkit у проєкті React.
+
+Писати slice-и, редюсери й асинхронні thunk-и.
+
+Працювати з React Router DOM для створення SPA.
+
+Інтегрувати маршрути з глобальним станом (наприклад, авторизація).
+
+Організовувати архітектуру з Redux + Router для масштабованості.

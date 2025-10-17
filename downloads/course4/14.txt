@@ -1,0 +1,58 @@
+Урок 14 – React Forms: керування формами та валідація
+Форми у React є основним способом збору даних від користувача. Цей урок охоплює контрольовані та неконтрольовані компоненти, керування станом форми та базову валідацію.
+
+Основні концепції:
+Контрольовані компоненти: значення input-ів зберігається у state через useState і оновлюється через onChange.
+Неконтрольовані компоненти: використання useRef для прямого доступу до DOM елементів.
+Обробка подій submit: onSubmit для отримання даних форми та запобігання перезавантаженню сторінки.
+Валідація: базова перевірка полів (required, email, min/max length) та показ повідомлень про помилки.
+Формові бібліотеки: можливе використання react-hook-form або Formik для спрощення керування формами та валідації.
+Приклад контрольованої форми:
+import { useState } from 'react';
+
+function ContactForm() {
+  const [form, setForm] = useState({ name: '', email: '' });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    const errs = {};
+    if (!form.name) errs.name = 'Ім’я обов’язкове';
+    if (!form.email) errs.email = 'Email обов’язковий';
+    else if (!/^[^@]+@[^@]+\.[^@]+$/.test(form.email)) errs.email = 'Некоректний email';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (validate()) {
+      console.log('Форма відправлена:', form);
+      setForm({ name: '', email: '' });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input name='name' value={form.name} onChange={handleChange} placeholder='Ім’я' />
+        <span style={{ color: 'red' }}>{errors.name}</span>
+      </div>
+      <div>
+        <input name='email' value={form.email} onChange={handleChange} placeholder='Email' />
+        <span style={{ color: 'red' }}>{errors.email}</span>
+      </div>
+      <button type='submit'>Відправити</button>
+    </form>
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Створювати контрольовані та неконтрольовані форми у React.
+Керувати станом полів через useState та useRef.
+Реалізовувати базову валідацію та показ повідомлень про помилки.
+Обробляти події submit та інтегрувати форми з API або локальним станом.
+Використовувати бібліотеки для форм (react-hook-form, Formik) для масштабних застосунків.

@@ -1,0 +1,40 @@
+Урок 9 – TailwindCSS + Prettier: сучасне оформлення та чистий код
+У цьому уроці розглянемо, як використовувати TailwindCSS для швидкої та гнучкої стилізації компонентів React та Prettier для автоматичного форматування коду. Це дозволяє писати красивий, підтримуваний та консистентний код без ручного налаштування CSS.
+
+TailwindCSS – основні концепції:
+Утилітарний підхід: класи для стилізації елементів напряму в JSX (className="bg-blue-500 text-white p-4 rounded").
+Композиція класів: комбінування кольорів, відступів, шрифтів, flex/grid-системи та responsive design (sm:, md:, lg:).
+Медіа-запити і адаптивний дизайн за допомогою breakpoint-класів.
+Псевдокласи: hover:, focus:, active: тощо.
+Темізація та dark mode через dark: класи.
+Prettier – автоматичне форматування:
+Підключення через npm install --save-dev prettier або інтеграція у редактор (VSCode).
+Автоформатування JSX, JS/TS, JSON, CSS, Tailwind-класів.
+Конфігурація через .prettierrc для стилю коду (відступи, лапки, крапки з комою).
+Інтеграція з ESLint для підтримки чистого і консистентного коду.
+Приклад Tailwind + React:
+function Card({ title, description }) {
+  return (
+    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300"
+    >
+      <h3 className="text-xl font-bold mb-2 text-gray-800">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+      <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Детальніше</button>
+    </div>
+  );
+}
+Prettier конфігурація:
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 80
+}
+✅ Мета: студенти повинні навчитися:
+
+Стилізувати компоненти швидко та ефективно за допомогою TailwindCSS.
+Створювати адаптивні та красиві UI без писання звичайного CSS.
+Підключати і налаштовувати Prettier для автоматичного форматування коду.
+Підтримувати консистентний стиль коду в командних проектах.
+Інтегрувати Tailwind та Prettier у React-проєкти без конфліктів.

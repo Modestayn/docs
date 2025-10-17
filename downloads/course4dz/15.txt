@@ -1,0 +1,5 @@
+ДЗ:
+
+Виконати тест по всіх темах: JS, DOM, HTML/CSS, Flexbox, Git, React, TS, TailwindCSS, RTK, Axios, i18n, React Router.
+
+Виконати всі практичні завдання з тесту.

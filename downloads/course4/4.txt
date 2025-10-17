@@ -1,0 +1,60 @@
+Урок 4 – useContext та useReducer: глобальний стан без Redux
+Хуки useContext і useReducer дозволяють будувати потужну систему керування станом без зовнішніх бібліотек. Вони дають змогу створити власний легкий аналог Redux прямо у React.
+
+Основні концепції:
+useContext — забезпечує доступ до спільного стану між компонентами без передачі props.
+createContext — створює контекст (глобальне сховище).
+useReducer — керує станом через редьюсер (функцію, що змінює стан на основі дії).
+Context + Reducer = архітектура з єдиним джерелом правди (як у Redux).
+Приклад:
+import { createContext, useContext, useReducer } from 'react';
+
+// 1. Створюємо контекст
+const CounterContext = createContext(null);
+
+// 2. Редʼюсер функція
+function counterReducer(state, action) {
+  switch (action.type) {
+    case 'increment': return { count: state.count + 1 };
+    case 'decrement': return { count: state.count - 1 };
+    default: return state;
+  }
+}
+
+// 3. Провайдер глобального стану
+export function CounterProvider({ children }) {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+  return (
+    
+      {children}
+    
+  );
+}
+
+// 4. Хук для використання контексту
+export function useCounter() {
+  return useContext(CounterContext);
+}
+
+// 5. Компонент приклад
+function Counter() {
+  const { state, dispatch } = useCounter();
+  return (
+    
+
+      
+Лічильник: {state.count}
+
+       dispatch({ type: 'increment' })}>+
+       dispatch({ type: 'decrement' })}>-
+    
+
+  );
+}
+✅ Мета: студенти повинні навчитися:
+
+Розуміти архітектуру контексту React та коли її використовувати.
+Створювати глобальний стан за допомогою useContext та useReducer.
+Відокремлювати бізнес-логіку від UI.
+Організовувати чисту архітектуру компонентів без Redux.
+Будувати власні провайдери та кастомні хуки для глобального стану.

@@ -1,0 +1,7 @@
+ДЗ:
+
+Створити компонент з анімацією появи/зникнення через AnimatePresence.
+
+Використати motion.div та властивості initial, animate, exit.
+
+Додати анімацію на hover і click через whileHover, whileTap.
